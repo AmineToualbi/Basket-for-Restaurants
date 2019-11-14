@@ -30,9 +30,9 @@ public class User {
 
     public void setPassword(String Password) { this.password = password; }
 
-    public boolean getisStaff() {return isStaff; }
+    public boolean getIsStaff() {return isStaff; }
 
-    public void setisStaff() { this.isStaff = isStaff; }
+    public void setIsStaff() { this.isStaff = isStaff; }
 
 }
 
