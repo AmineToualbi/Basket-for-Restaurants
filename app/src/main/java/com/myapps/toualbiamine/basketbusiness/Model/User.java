@@ -7,16 +7,14 @@ public class User {
         private String email;
         private boolean isStaff;
 
-    public User() {
+    public User() { }
 
-}
-
-    public User(String email, String name, String password, Boolean isStaff) {
+    public User(String email, String name, String password, boolean isStaff) {
         this.email = email;
         this.name = name;
         this.password = password;
         this.isStaff = isStaff;
-}
+    }
 
     public String getEmail() { return email; }
 
@@ -28,11 +26,11 @@ public class User {
 
     public String getPassword() { return password; }
 
-    public void setPassword(String Password) { this.password = password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public boolean getIsStaff() {return isStaff; }
+    public boolean getIsStaff() { return isStaff; }
 
-    public void setIsStaff() { this.isStaff = isStaff; }
+    public setIsStaff() { this.isStaff = isStaff; }
 
 }
 
