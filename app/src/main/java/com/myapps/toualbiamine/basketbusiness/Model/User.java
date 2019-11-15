@@ -30,7 +30,7 @@ public class User {
 
     public boolean getIsStaff() { return isStaff; }
 
-    public setIsStaff() { this.isStaff = isStaff; }
+    public void setIsStaff() { this.isStaff = isStaff; }
 
 }
 
