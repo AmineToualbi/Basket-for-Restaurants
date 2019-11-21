@@ -11,22 +11,33 @@
         android:layout_width="314dp"
         android:layout_height="53dp"
         android:layout_marginStart="92dp"
-        android:layout_marginTop="35dp"
         android:layout_marginEnd="93dp"
         android:layout_marginBottom="148dp"
         android:text="@string/common_signin_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="370dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="21dp"
+        android:ems="10"
+        android:hint="School Email Address"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        tools:layout_editor_absoluteY="335dp" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="370dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="27dp"
         android:layout_marginEnd="21dp"
         android:ems="10"
         android:hint="Password"
@@ -34,23 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="370dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="146dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="27dp"
-        android:ems="10"
-        android:hint="School Email Address"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        tools:layout_editor_absoluteY="422dp" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -77,21 +72,21 @@
         android:text="Forgot Password?"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintVertical_bias="0.24" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="161dp"
-        android:layout_height="115dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="33dp"
         android:layout_marginEnd="125dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/ic_launcher"
+        tools:layout_editor_absoluteY="-4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
