@@ -24,7 +24,7 @@ public class User {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
     public boolean getIsStaff() { return isStaff; }
-    public void setIsStaff() { this.isStaff = isStaff; }
+    public void setIsStaff(boolean isStaff) { this.isStaff = isStaff; }
 
 }
 
