@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="4dp">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/foodNameInput"
+            android:hint="Food Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/grayblack"
+            android:textSize="24sp"
+            android:inputType="textEmailAddress"
+            app:met_baseColor="@android:color/black"
+            app:met_floatingLabel="highlight"
+            app:met_primaryColor="@color/black"
+            app:met_singleLineEllipsis="true"
+            android:layout_gravity="center"
+            android:text=""
+            android:textAlignment="center"
+            />
+        
+        <LinearLayout
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/selectBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="SELECT"
+                android:textColor="@color/white"
+                android:shadowColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/linear1"
+                android:layout_margin="50dp"
+                />
+
+            <Button
+                android:id="@+id/uploadBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_button"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="UPLOAD"
+                android:textColor="@color/white"
+                android:shadowColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/linear1"
+                android:layout_margin="50dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
