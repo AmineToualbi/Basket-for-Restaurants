@@ -1,4 +1,6 @@
 package com.myapps.toualbiamine.basketbusiness.ViewHolder;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -6,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.myapps.toualbiamine.basketbusiness.Common.Common;
 import com.myapps.toualbiamine.basketbusiness.Interface.ItemClickListener;
 import com.myapps.toualbiamine.basketbusiness.R;
 
@@ -16,7 +19,7 @@ import com.myapps.toualbiamine.basketbusiness.R;
     4. Do ur thing in FoodList.
  */
 
-public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
 
     public TextView menuName;
     public ImageView menuImg;
@@ -27,6 +30,7 @@ public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         super(itemView);
         menuName = (TextView) itemView.findViewById(R.id.menuName);
         menuImg = (ImageView) itemView.findViewById(R.id.menuImg);
+        itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);
     }
 
@@ -39,4 +43,10 @@ public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         itemClickListener.onClick(v, getAdapterPosition(), false);
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("Select an action");
+        menu.add(0, 0, getAdapterPosition(), Common.UPDATE);
+        menu.add(0, 1, getAdapterPosition(), Common.DELETE);
+    }
 }
