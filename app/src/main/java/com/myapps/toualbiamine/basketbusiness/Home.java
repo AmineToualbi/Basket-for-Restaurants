@@ -136,16 +136,17 @@ public class Home extends AppCompatActivity
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
         //Set button.
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 if(newFood != null) {
                     foods.push().setValue(newFood);
+                    Toast.makeText(Home.this, newFood.getName() + " added to menu!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
