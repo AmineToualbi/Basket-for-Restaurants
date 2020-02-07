@@ -131,10 +131,10 @@ public class SignIn extends AppCompatActivity {
                             Paper.book().write(Common.NAME_KEY, user.getName());
                         }
 
-                        //Intent goToHome = new Intent(getApplicationContext(), Home.class);
+                        Intent goToHome = new Intent(getApplicationContext(), Home.class);
                         Common.currentUser = user;
-                        //startActivity(goToHome);
-                        // finish();
+                        startActivity(goToHome);
+                        finish();
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "Your email and/or password may be incorrect!", Toast.LENGTH_SHORT).show();
