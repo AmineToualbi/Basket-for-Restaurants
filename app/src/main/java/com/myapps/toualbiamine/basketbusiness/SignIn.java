@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,7 +33,7 @@ import io.paperdb.Paper;
 
 public class SignIn extends AppCompatActivity {
 
-    EditText emailInput;
+    EditText restaurantNameInput;
     EditText passwordInput;
 
     Button signInBtn;
@@ -46,7 +47,7 @@ public class SignIn extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference tableUser;
 
-    String signInEmail;
+    String signInRestaurantName;
     String signInPassword;
 
     Dialog forgotPasswordPopup;
@@ -58,7 +59,7 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        emailInput = (MaterialEditText) findViewById(R.id.emailSignIn);
+        restaurantNameInput = (MaterialEditText) findViewById(R.id.restaurantSignIn);
         passwordInput = (MaterialEditText) findViewById(R.id.passwordSignIn);
 
         signInBtn = (Button) findViewById(R.id.signInBtn);
@@ -94,10 +95,10 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void loginUser() {
-        signInEmail = emailInput.getText().toString();
+        signInRestaurantName = restaurantNameInput.getText().toString();
         signInPassword = passwordInput.getText().toString();
 
-        if(TextUtils.isEmpty(signInEmail) || TextUtils.isEmpty(signInPassword)) {
+        if(TextUtils.isEmpty(signInRestaurantName) || TextUtils.isEmpty(signInPassword)) {
             Toast.makeText(getApplicationContext(), "Please fill all the fields.", Toast.LENGTH_SHORT).show();
             signInProgressBar.setVisibility(View.INVISIBLE);
         }
@@ -108,25 +109,24 @@ public class SignIn extends AppCompatActivity {
 
     private void checkUserInDB() {
         //Get the data by querying the database.
-        tableUser.addValueEventListener(new ValueEventListener() {
+        tableUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Data inputted by the user => credentials.
-                signInEmail = convertToFirebaseFormat(emailInput.getText().toString());
+                signInRestaurantName = restaurantNameInput.getText().toString();
                 signInPassword = passwordInput.getText().toString();
 
                 //Check if email inputted is .edu & exists in DB.
-                if(!(signInEmail.equals("")) && dataSnapshot.child(signInEmail).exists()) {
+                if(!(signInRestaurantName.equals("")) && dataSnapshot.child(signInRestaurantName).exists()) {
                     //Get user information.
-                    User user = dataSnapshot.child(signInEmail).getValue(User.class);
+                    User user = dataSnapshot.child(signInRestaurantName).getValue(User.class);
 
                     if(user.getIsStaff() && user.getPassword().equals(signInPassword)) {
-                        user.setEmail(signInEmail);
 
                         signInProgressBar.setVisibility(View.INVISIBLE);
 
                         if (rememberMeCb.isChecked()) {      //Save email & password to remember.
-                            Paper.book().write(Common.USER_KEY, signInEmail);
+                            Paper.book().write(Common.USER_KEY, signInRestaurantName);
                             Paper.book().write(Common.PWD_KEY, signInPassword);
                             Paper.book().write(Common.NAME_KEY, user.getName());
                         }
@@ -177,29 +177,6 @@ public class SignIn extends AppCompatActivity {
                 forgotPasswordPopup.dismiss();
             }
         });
-    }
-
-
-    //SUU uses weird format for email -> mohamedtoualbi@students.suu.edu.
-    private String convertToFirebaseFormat(String email) {
-        String formatted = "";
-        String domain = "";
-
-        //Faster to check from the end that going through the entire string.
-        for (int i = 0; i < email.length(); i++) {
-            char c = email.charAt(i);
-            if (c == '@') {
-                formatted = email.substring(0, i);
-                domain = email.substring(i + 1, email.length());
-                break;
-            }
-        }
-
-        if (!(domain.equals("students.suu.edu"))) {
-            return "";
-        }
-
-        return formatted;
     }
 
 }

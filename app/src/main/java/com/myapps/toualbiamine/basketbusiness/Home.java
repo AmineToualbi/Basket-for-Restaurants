@@ -218,7 +218,7 @@ public class Home extends AppCompatActivity
                 Food.class,
                 R.layout.menu_item,
                 MenuViewHolder.class,
-                foods
+                foods.orderByChild("restaurantID").equalTo(Common.currentUser.getRestaurantID())        //SELECT * FROM foods WHERE restaurantID = currentUser.getRestaurantID
         ) {
             @Override
             protected void populateViewHolder(MenuViewHolder menuViewHolder, Food food, int i) {

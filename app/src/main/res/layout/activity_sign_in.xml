@@ -26,7 +26,7 @@
         android:layout_marginRight="8dp">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/emailSignIn"
+            android:id="@+id/restaurantSignIn"
             android:hint="Restaurant ID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
