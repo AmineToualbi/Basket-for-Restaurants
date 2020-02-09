@@ -66,6 +66,7 @@ public class Home extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
 
     MaterialEditText foodNameInput;
+    MaterialEditText foodDescriptionInput;
     Button selectBtn;
     Button uploadBtn;
 
@@ -118,6 +119,7 @@ public class Home extends AppCompatActivity
         View addMenuLayout = inflater.inflate(R.layout.add_menu_layout, null);
 
         foodNameInput = addMenuLayout.findViewById(R.id.foodNameInput);
+        foodDescriptionInput = addMenuLayout.findViewById(R.id.foodDescriptionInput);
         selectBtn = addMenuLayout.findViewById(R.id.selectBtn);
         uploadBtn = addMenuLayout.findViewById(R.id.uploadBtn);
 
@@ -175,7 +177,7 @@ public class Home extends AppCompatActivity
                         @Override
                         public void onSuccess(Uri uri) {
                             //Set value for new food only if image was uploaded & we can use the download URL
-                            newFood = new Food(foodNameInput.getText().toString(), uri.toString());
+                            newFood = new Food(foodNameInput.getText().toString(), uri.toString(), foodDescriptionInput.getText().toString(), Common.currentUser.getRestaurantID());
                         }
                     });
                 }
@@ -297,7 +299,7 @@ public class Home extends AppCompatActivity
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(item.getTitle().equals(Common.UPDATE)) {
-            showUploadPopup(adapter.getRef(item.getOrder()).getKey(), adapter.getItem(item.getOrder()));
+            showUpdatePopup(adapter.getRef(item.getOrder()).getKey(), adapter.getItem(item.getOrder()));
         }
         if(item.getTitle().equals(Common.DELETE)) {
             deleteFood(adapter.getRef(item.getOrder()).getKey()) ;
@@ -310,7 +312,7 @@ public class Home extends AppCompatActivity
         Toast.makeText(Home.this, "Menu deleted", Toast.LENGTH_SHORT).show();
     }
 
-    private void showUploadPopup(final String key, final Food item) {
+    private void showUpdatePopup(final String key, final Food item) {
         Log.e("TAG", "Called showUpload with key = " + key);
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
         alertDialog.setTitle("Update menu");
@@ -321,6 +323,8 @@ public class Home extends AppCompatActivity
 
         foodNameInput = addMenuLayout.findViewById(R.id.foodNameInput);
         foodNameInput.setText(item.getName());
+        foodDescriptionInput = addMenuLayout.findViewById(R.id.foodDescriptionInput);
+        foodDescriptionInput.setText(item.getDescription());        //For some reason, item.getDescription() => null. TO FIX in the future.
         selectBtn = addMenuLayout.findViewById(R.id.selectBtn);
         uploadBtn = addMenuLayout.findViewById(R.id.uploadBtn);
 
@@ -346,8 +350,8 @@ public class Home extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                item.setName(foodNameInput.getText().toString());
-                foods.child(key).setValue(item);
+                newFood = new Food(foodNameInput.getText().toString(), item.getImage(), foodDescriptionInput.getText().toString(), Common.currentUser.getRestaurantID());
+                foods.child(key).setValue(newFood);
             }
         });
         alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
