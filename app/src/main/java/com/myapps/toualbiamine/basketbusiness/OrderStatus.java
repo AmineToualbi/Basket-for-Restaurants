@@ -1,23 +1,31 @@
 package com.myapps.toualbiamine.basketbusiness;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.myapps.toualbiamine.basketbusiness.Common.Common;
 import com.myapps.toualbiamine.basketbusiness.Interface.ItemClickListener;
 import com.myapps.toualbiamine.basketbusiness.Model.Order;
 import com.myapps.toualbiamine.basketbusiness.Model.Request;
 import com.myapps.toualbiamine.basketbusiness.ViewHolder.OrderViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderStatus extends AppCompatActivity {
@@ -47,23 +55,54 @@ public class OrderStatus extends AppCompatActivity {
         loadOrders();
     }
 
-    private void loadOrders() {
+    /*private void loadOrders() {
+        requests.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Request r = dataSnapshot.getValue(Request.class);
+                Log.e("TAG", "Request retrieved -> " + r.getName() + " key = " + dataSnapshot.getKey());
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }*/
+
+      private void loadOrders() {
+          DatabaseReference restaurantDB = database.getReference("Requests/"+Common.currentUser.getRestaurantID());
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(
                 Request.class,
                 R.layout.order_layout,
                 OrderViewHolder.class,
-                requests
+                restaurantDB
         ) {
             @Override
             protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
-                orderViewHolder.orderID.setText(adapter.getRef(i).getKey());
+                orderViewHolder.orderID.setText(request.getName());
                 orderViewHolder.orderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
-                List<Order> activeOrders = request.getOrder();
                 String orderMenu = "";
 
-                for(int pos=0; pos<activeOrders.size(); pos++) {
-                    String currentMenu = activeOrders.get(pos).getMenuName();
-                    String currentQuantity = activeOrders.get(pos).getQuantity();
+                List<Order> orders = request.getOrder();
+                for(int pos=0; pos<orders.size(); pos++) {
+                    String currentMenu = orders.get(pos).getMenuName();
+                    String currentQuantity = orders.get(pos).getQuantity();
                     //orderMenu += currentMenu + " x" + currentQuantity + " | ";
                     if(pos != 0) {
                         orderMenu += "\n";
@@ -80,8 +119,10 @@ public class OrderStatus extends AppCompatActivity {
                 });
             }
         };
+
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
     }
 
     @Override
