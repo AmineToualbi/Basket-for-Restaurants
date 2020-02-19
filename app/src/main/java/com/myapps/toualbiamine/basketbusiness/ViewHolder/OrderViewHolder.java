@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.myapps.toualbiamine.basketbusiness.Interface.ItemClickListener;
 import com.myapps.toualbiamine.basketbusiness.R;
 
-public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,  View.OnCreateContextMenuListener{
+public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener{
 
     public TextView orderID;
     public TextView orderStatus;

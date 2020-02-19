@@ -3,14 +3,16 @@ package com.myapps.toualbiamine.basketbusiness.Model;
 public class Order {
     private int orderID;
     private String menuID;       //If private => weird bug w Room.
+    private String restaurantID;
     private String menuName;
     private String quantity;
 
     public Order() { }
 
-    public Order(int orderID, String menuID, String menuName, String quantity) {
+    public Order(int orderID, String menuID, String restaurantID, String menuName, String quantity) {
         this.orderID = orderID;
         this.menuID = menuID;
+        this.restaurantID = restaurantID;
         this.menuName = menuName;
         this.quantity = quantity;
     }
@@ -26,6 +28,12 @@ public class Order {
     }
     public void setMenuID(String menuID) {
         this.menuID = menuID;
+    }
+    public String getRestaurantID() {
+        return restaurantID;
+    }
+    public void setRestaurantID(String restaurantID) {
+        this.restaurantID = restaurantID;
     }
     public String getMenuName() {
         return menuName;
