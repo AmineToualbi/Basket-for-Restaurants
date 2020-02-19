@@ -277,6 +277,11 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if(id == R.id.nav_orders) {
+            Intent ordersPage = new Intent(Home.this, OrderStatus.class);
+            startActivity(ordersPage);
+        }
+
 //        if (id == R.id.nav_home) {
 //            // Handle the camera action
 //        } else if (id == R.id.nav_gallery) {
@@ -312,8 +317,8 @@ public class Home extends AppCompatActivity
         Toast.makeText(Home.this, "Menu deleted", Toast.LENGTH_SHORT).show();
     }
 
-    private void showUpdatePopup(final String key, final Food item) {
-        Log.e("TAG", "Called showUpload with key = " + key);
+    private void showUpdatePopup(final String key,  final Food item) {
+        Log.e("TAG", "Called showUpload with key = " + key + " & Food description = " + item.getDescription());
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
         alertDialog.setTitle("Update menu");
         alertDialog.setMessage("Please fill out this information");
