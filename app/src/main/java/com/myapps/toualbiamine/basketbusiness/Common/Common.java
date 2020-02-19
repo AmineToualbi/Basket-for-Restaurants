@@ -12,4 +12,11 @@ public class Common {
     public static final String PWD_KEY = "Password";
     public static final String NAME_KEY = "Name";
 
+    public static String convertCodeToStatus(String code) {
+        if(code.equals("0")) return "Placed";
+        if(code.equals("1")) return "Ready";
+        if(code.equals("2")) return "Picked up";
+        return "";
+    }
+
 }
