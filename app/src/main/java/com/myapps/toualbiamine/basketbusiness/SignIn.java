@@ -42,8 +42,6 @@ public class SignIn extends AppCompatActivity {
 
     ProgressBar signInProgressBar;
 
-    final String TAG = "SignInActivity";
-
     FirebaseDatabase database;
     DatabaseReference tableUser;
 
