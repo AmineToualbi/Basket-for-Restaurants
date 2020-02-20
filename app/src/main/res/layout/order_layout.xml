@@ -54,6 +54,17 @@
                 android:layout_gravity="start"
                 />
 
+            <TextView
+                android:id="@+id/foodRestriction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No pickles"
+                android:textAllCaps="true"
+                android:textStyle="italic"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="start"
+                />
+
 
         </LinearLayout>
 

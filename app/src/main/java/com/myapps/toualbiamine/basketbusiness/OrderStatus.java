@@ -57,6 +57,7 @@ public class OrderStatus extends AppCompatActivity {
             protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
                 orderViewHolder.orderID.setText(request.getName());
                 orderViewHolder.orderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
+                orderViewHolder.restriction.setText(request.getRestriction());
                 String orderMenu = "";
 
                 List<Order> orders = request.getOrder();

@@ -15,6 +15,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
     public TextView orderID;
     public TextView orderStatus;
     public TextView orderMenu;
+    public TextView restriction;
 
     private ItemClickListener itemClickListener;
 
@@ -23,6 +24,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         orderID = (TextView) itemView.findViewById(R.id.orderID);
         orderStatus = (TextView) itemView.findViewById(R.id.orderStatus);
         orderMenu = (TextView) itemView.findViewById(R.id.orderMenu);
+        restriction = (TextView) itemView.findViewById(R.id.foodRestriction);
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
     }
@@ -32,7 +34,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         menu.setHeaderTitle("Select an action");
         menu.add(0, 0, getAdapterPosition(), "Update");
         menu.add(0, 1, getAdapterPosition(), "Delete");
-
+        menu.add(0, 2, getAdapterPosition(), "Flag User");
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
