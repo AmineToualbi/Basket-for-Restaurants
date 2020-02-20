@@ -86,12 +86,11 @@ public class OrderStatus extends AppCompatActivity {
     }*/
 
       private void loadOrders() {
-          DatabaseReference restaurantDB = database.getReference("Requests/"+Common.currentUser.getRestaurantID());
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(
                 Request.class,
                 R.layout.order_layout,
                 OrderViewHolder.class,
-                restaurantDB
+                requests.orderByChild("restaurantID").equalTo(Common.currentUser.getRestaurantID())
         ) {
             @Override
             protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
